@@ -1,0 +1,35 @@
+ru:
+  activerecord:
+    models:
+      bulletin: Объявление
+      category: Категория
+
+    attributes:
+      bulletin:
+        title: Заголовок
+        description: Описание
+        category: Категория
+        image: Фотография
+      category:
+        name: Название
+
+    errors:
+      models:
+        bulletin:
+          attributes:
+            title:
+              blank: не может быть пустым
+              too_short: недостаточной длины (не может быть меньше 5 символа)
+              too_long: слишком большой длины (не может быть больше чем 255 символа)
+            body:
+              blank: не может быть пустым
+              too_short: недостаточной длины (не может быть меньше 200 символов)
+              too_long: слишком большой длины (не может быть больше чем 4000 символов)
+            category:
+              required: не может отсутствовать
+        category:
+          attributes:
+            name:
+              blank: не может быть пустым
+
+

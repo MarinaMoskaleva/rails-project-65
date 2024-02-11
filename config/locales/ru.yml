@@ -1,0 +1,55 @@
+ru:
+  flash:
+    notice:
+      success: Успешно
+      bulletin_created: 'Объявление было создано'
+      bulletin_published: 'Пост опубликован'
+      category_created: Категория успешно создана
+      category_updated: Категория успешно обновлена
+      bulletin_sent_to_moderation: Объявление отправлено на модерацию
+    error:
+      bulletin_not_created: Не удалось создать объявление. Проверьте введенные данные
+      category_not_created: Не удалось создать категорию. Проверьте введенные данные
+      category_not_updated: Не удалось обновить категорию. Проверьте введенные данные
+      bulletin_didnt_sent_to_moderation: Не удалось отправить объявление на модерацию
+
+
+  ancestry:
+    no_child_for_new_record: "Нет потомков для новой записи."
+  new_post: "Новый пост"
+  sign_in: Войти
+  sign_out: Выйти
+  title: Доска объявлений
+  main: Главная
+  add_bulletin: Добавить
+  add_bulletin_full: Добавить объявление
+  admin_board: Админка
+  success: Успешно
+  new_bulletin: Добавить объявление
+  user_must_be_authorized: Пользователь должен быть авторизован
+  bulletins: Объявления
+  categories: Категории
+  all_bulletins: Все объявления
+  all_categories: Все категории
+  bulletin_title: Название
+  bulletin_state: Состояние
+  bulletin_date: Дата создания
+  bulletin_action: Действие
+  category_title: Название
+  category_id: ID
+  category_action: Действие
+  archive: Архивировать
+  on_moderation: На модерацию
+  to_archive: В архив
+  show: Показать
+  remove: Удалить
+  confirm_delete: Удалить категорию?
+  edit: Редактировать
+  add_category: Добавить категорию
+  my_bulletins: Мои объявления
+  bulletin_states:
+    draft: Черновик
+    under_moderation: На модерации
+    published: Опубликовано
+    rejected: Отклонено
+    archived: В архиве

@@ -1,0 +1,12 @@
+ru:
+  simple_form:
+    
+  helpers:
+    submit:
+      bulletin:
+        create: Создать объявление
+      category:
+        create: Сохранить категорию
+      user:
+        create: Регистрация
+

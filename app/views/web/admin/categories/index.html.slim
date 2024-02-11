@@ -1,0 +1,28 @@
+.row
+  .col-md-3
+      = render 'web/admin/shared/nav'
+  .col-md-9
+    h1.h2.mb-4
+      = t('categories').capitalize
+    = link_to t('add_category'), new_admin_category_path
+    .row.mt-2
+      table.table.table-borderless
+        thead
+          tr
+            th
+              = t('category_id')
+            th
+              = t('category_title')
+            th
+              = t('category_action')
+        tbody
+          - @categories.each do |category|
+            tr
+              td
+                = category.id
+              td
+                = category.name
+              td
+                = link_to t('edit'), edit_admin_category_path(category), class: 'me-1'
+                = button_to(admin_category_path(category), method: :delete, data: { turbo: false }, class: 'nav-link link-danger')
+                    = t('remove')
