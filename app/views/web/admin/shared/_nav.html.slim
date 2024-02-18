@@ -1,5 +1,11 @@
+- current_on_moderation = current_page?(on_moderation_admin_bulletins_path) || current_page?(admin_root_path)
+- current_all_bulletins = current_page?(admin_bulletins_path)
+- current_all_categories = current_page?(admin_categories_path)
+
 ul.nav.flex-column.nav-pills
   li.nav-item
-    = link_to t('all_bulletins'), admin_bulletins_path, class: "nav-link link-dark #{' active' if current_page?(admin_bulletins_path)}"
+    = link_to t('bulletins_on_moderation'), on_moderation_admin_bulletins_path, class: "nav-link link-dark #{' active' if current_on_moderation}"
   li.nav-item
-    = link_to t('all_categories'), admin_categories_path, class: "nav-link link-dark #{' active' if current_page?(admin_categories_path)}"
+    = link_to t('all_bulletins'), admin_bulletins_path, class: "nav-link link-dark #{' active' if current_all_bulletins}"
+  li.nav-item
+    = link_to t('all_categories'), admin_categories_path, class: "nav-link link-dark #{' active' if current_all_categories}"

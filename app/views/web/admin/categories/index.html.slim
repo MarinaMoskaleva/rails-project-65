@@ -24,5 +24,4 @@
                 = category.name
               td
                 = link_to t('edit'), edit_admin_category_path(category), class: 'me-1'
-                = button_to(admin_category_path(category), method: :delete, data: { turbo: false }, class: 'nav-link link-danger')
-                    = t('remove')
+                = link_to t('remove'), admin_category_path(category), data: { turbo_confirm: t('are_you_sure'), turbo_method: :delete }, class: 'link-danger'

@@ -2,21 +2,25 @@ ru:
   flash:
     notice:
       success: Успешно
-      bulletin_created: 'Объявление было создано'
-      bulletin_published: 'Пост опубликован'
+      bulletin_created: Объявление было создано
+      bulletin_updated: Объявление было обновлено
       category_created: Категория успешно создана
       category_updated: Категория успешно обновлена
       bulletin_sent_to_moderation: Объявление отправлено на модерацию
+      bulletin_sent_to_archive: Объявление отправлено в архив
+      bulletin_was_published: Объявление опубликовано
+      bulletin_was_rejected: Объявление возвращено
     error:
       bulletin_not_created: Не удалось создать объявление. Проверьте введенные данные
+      bulletin_not_updated: Не удалось обновить объявление. Проверьте введенные данные
       category_not_created: Не удалось создать категорию. Проверьте введенные данные
       category_not_updated: Не удалось обновить категорию. Проверьте введенные данные
       bulletin_didnt_sent_to_moderation: Не удалось отправить объявление на модерацию
+      bulletin_didnt_sent_to_archive: Не удалось отправить объявление в архив
+      bulletin_wasnt_published: Не удалось опубликовать объявление
+      bulletin_wasnt_rejected: Не удалось вернуть объявление
 
 
-  ancestry:
-    no_child_for_new_record: "Нет потомков для новой записи."
-  new_post: "Новый пост"
   sign_in: Войти
   sign_out: Выйти
   title: Доска объявлений
@@ -26,11 +30,13 @@ ru:
   admin_board: Админка
   success: Успешно
   new_bulletin: Добавить объявление
+  edit_bulletin: Редактировать объявление
   user_must_be_authorized: Пользователь должен быть авторизован
   bulletins: Объявления
   categories: Категории
   all_bulletins: Все объявления
   all_categories: Все категории
+  bulletins_on_moderation: Объявления на модерации
   bulletin_title: Название
   bulletin_state: Состояние
   bulletin_date: Дата создания
@@ -51,5 +57,14 @@ ru:
     draft: Черновик
     under_moderation: На модерации
     published: Опубликовано
-    rejected: Отклонено
+    rejected: Возвращено
     archived: В архиве
+  search_by_title: Искать по названию объявления
+  choose_category: Выбрать категорию
+  search_btn: Искать
+  reset_btn: Сброс
+  admin_action:
+    publish: Опубликовать
+    reject: Вернуть
+    archive: В архив
+  are_you_sure: Вы уверены?

@@ -46,12 +46,12 @@ class ApplicationPolicy
       raise NotImplementedError, "You must define #resolve in #{self.class}"
     end
 
-    private
-
     attr_reader :user, :scope
+  end
 
-    def admin?
-      @user&.admin?
-    end
+  private
+
+  def admin?
+    @user&.admin?
   end
 end

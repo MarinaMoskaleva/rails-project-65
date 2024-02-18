@@ -1,8 +1,12 @@
+# frozen_string_literal: true
+
 class Web::BulletinsController < Web::ApplicationController
-  before_action :check_if_user_authorized, except: [:index, :show]
+  before_action :check_if_user_authorized, except: %i[index show]
+  before_action :set_bulletin, only: %i[to_moderation archive edit update]
 
   def index
-    @bulletins = Bulletin.includes(:user).all
+    @q = Bulletin.published.ransack(params[:q])
+    @bulletins = @q.result.includes(:user).page(params[:page])
   end
 
   def show
@@ -13,43 +17,68 @@ class Web::BulletinsController < Web::ApplicationController
     @bulletin = Bulletin.new
   end
 
+  def edit
+    @bulletin = set_bulletin
+  end
+
   def create
     @bulletin = User.find_by(id: session[:user_id]).bulletins.build(bulletin_params)
-      if @bulletin.save
-        flash[:notice] = I18n.t('flash.notice.bulletin_created')
-        redirect_to root_path
-      else
-        flash[:error] = I18n.t('flash.error.bulletin_not_created')
-        render :new, status: :unprocessable_entity
-      end
+    if @bulletin.save
+      flash[:notice] = I18n.t('flash.notice.bulletin_created')
+      redirect_to root_path
+    else
+      flash[:error] = I18n.t('flash.error.bulletin_not_created')
+      render :new, status: :unprocessable_entity
+    end
+  end
+
+  def update
+    @bulletin = set_bulletin
+    if @bulletin.update(bulletin_params)
+      flash[:notice] = I18n.t('flash.notice.bulletin_updated')
+      redirect_to root_path
+    else
+      flash[:error] = I18n.t('flash.error.bulletin_not_updated')
+      render :edit, status: :unprocessable_entity
+    end
   end
 
   def to_moderation
-    bulletin = Bulletin.find_by(id: params[:id])
+    bulletin = set_bulletin
     authorize bulletin
     if bulletin.may_to_moderation?
       bulletin.to_moderation!
       flash[:notice] = I18n.t('flash.notice.bulletin_sent_to_moderation')
-      redirect_to profile_path
     else
       flash[:error] = I18n.t('flash.notice.bulletin_didnt_send_to_moderation')
-      redirect_to profile_path
     end
+    redirect_to profile_path
   end
 
   def archive
-    
+    bulletin = set_bulletin
+    authorize bulletin
+    if bulletin.may_archive?
+      bulletin.archive!
+      flash[:notice] = I18n.t('flash.notice.bulletin_sent_to_archive')
+    else
+      flash[:error] = I18n.t('flash.notice.bulletin_didnt_send_to_archive')
+    end
+    redirect_to profile_path
   end
 
   private
 
-    def bulletin_params
-      params.require(:bulletin).permit(
-        :title,
-        :description,
-        :category_id,
-        :image
-      )
-    end
+  def bulletin_params
+    params.require(:bulletin).permit(
+      :title,
+      :description,
+      :category_id,
+      :image
+    )
+  end
 
+  def set_bulletin
+    Bulletin.find_by(id: params[:id])
+  end
 end

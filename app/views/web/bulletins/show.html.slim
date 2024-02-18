@@ -7,12 +7,12 @@
         hr
       .row
         .col-8
-          = image_tag @bulletin.image.variant(resize_to_limit: [100, nil]), class: 'img-thumbnail mb-2'
+          - if @bulletin.image_attachment
+            = image_tag @bulletin.image.variant(resize_to_limit: [100, nil]), class: 'img-thumbnail mb-2'
           p
             = @bulletin.description
         .col-4
           .card
-            .card-body 
+            .card-body
               h3.h5.card-title
                 = @bulletin.user.name
-      

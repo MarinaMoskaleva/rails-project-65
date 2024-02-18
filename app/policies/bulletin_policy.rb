@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 class BulletinPolicy < ApplicationPolicy
-
   def index?
     admin?
   end
@@ -30,24 +29,23 @@ class BulletinPolicy < ApplicationPolicy
     admin?
   end
 
-  def to_moderation
+  def to_moderation?
     author?
   end
 
-  def publish
+  def publish?
     admin?
   end
 
-  def reject
+  def reject?
     admin?
   end
 
-  def archive
+  def archive?
     author? || admin?
   end
 
   def author?
     @record.user == @user
   end
-
 end

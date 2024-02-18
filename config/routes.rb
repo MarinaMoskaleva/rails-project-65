@@ -20,8 +20,13 @@ Rails.application.routes.draw do
     root to: "bulletins#index"
 
     namespace :admin do
-      root to: "bulletins#index"
-      resources :bulletins, only: %i[index show]
+      root to: "bulletins#on_moderation"
+      resources :bulletins, only: %i[index show] do
+        get :on_moderation, on: :collection
+        member do
+          patch :publish, :archive, :reject
+        end
+      end
       resources :categories
     end
 

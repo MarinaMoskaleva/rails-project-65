@@ -6,5 +6,4 @@ class Web::Admin::ApplicationController < Web::ApplicationController
   def authorise_admin
     current_user&.admin?
   end
-
 end

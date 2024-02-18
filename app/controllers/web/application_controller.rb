@@ -4,7 +4,7 @@ class Web::ApplicationController < ApplicationController
   helper_method :current_user
 
   def current_user
-    @current_user ||= User.find_by(id: session[:user_id]) 
+    @current_user ||= User.find_by(id: session[:user_id])
   end
 
   def check_if_user_authorized
@@ -13,5 +13,4 @@ class Web::ApplicationController < ApplicationController
     flash[:notice] = t('user_must_be_authorized')
     redirect_to root_path
   end
-
 end

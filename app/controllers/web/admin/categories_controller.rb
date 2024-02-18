@@ -1,11 +1,20 @@
-class Web::Admin::CategoriesController < Web::Admin::ApplicationController
+# frozen_string_literal: true
 
+class Web::Admin::CategoriesController < Web::Admin::ApplicationController
   def index
     @categories = Category.all
   end
 
+  def show
+    @category = Category.find_by(id: params[:id])
+  end
+
   def new
     @category = Category.new
+  end
+
+  def edit
+    @category = Category.find_by(id: params[:id])
   end
 
   def create
@@ -17,14 +26,6 @@ class Web::Admin::CategoriesController < Web::Admin::ApplicationController
       flash[:error] = I18n.t('flash.error.category_not_created')
       render :new, status: :unprocessable_entity
     end
-  end
-
-  def show
-    @category = Category.find_by(id: params[:id])
-  end
-
-  def edit
-    @category = Category.find_by(id: params[:id])
   end
 
   def update
@@ -41,10 +42,9 @@ class Web::Admin::CategoriesController < Web::Admin::ApplicationController
   def destroy
     @category = Category.find_by(id: params[:id])
     return if @category.blank?
-    
+
     @category.destroy
     redirect_to admin_categories_path
-
   end
 
   private

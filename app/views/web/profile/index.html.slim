@@ -7,6 +7,7 @@
         hr
       = link_to t('add_bulletin_full'), new_bulletin_path
       .p-3.bg-light
+        = render 'web/shared/search_form'
       .row.mt-2
         table.table.table-borderless
           thead
@@ -30,10 +31,10 @@
                   = time_ago_in_words(bulletin.created_at)
                 td
                   = link_to t('show'), bulletin_path(bulletin), class: 'me-1'
-                  = link_to t('edit'), bulletin_path(bulletin), class: 'me-1'
+                  = link_to t('edit'), edit_bulletin_path(bulletin), class: 'me-1'
                   - if bulletin.may_to_moderation?
                     = link_to t('on_moderation'), to_moderation_bulletin_path(bulletin), data: { turbo_method: :patch }, class: 'me-1'
                   - if bulletin.may_archive?
-                    = link_to t('to_archive'), archive_bulletin_path(bulletin), data: { turbo_method: :patch }, class: 'me-1'
-
-                
+                    = link_to t('to_archive'), archive_bulletin_path(bulletin), data: { turbo_method: :patch }, class: 'me-1 link-danger'
+      .row.mt-2
+        == paginate @bulletins, remote: true

@@ -28,5 +28,4 @@ class CategoryPolicy < ApplicationPolicy
   def destroy?
     admin?
   end
-  
 end

@@ -1,0 +1,10 @@
+.row
+  .col-md-3
+    = render 'web/admin/shared/nav'
+  .col-md-9
+    h1.h2.mb-4
+      = t('bulletins_on_moderation').capitalize
+    .row.mt-2
+      = render 'web/admin/bulletins/under_moderation'
+    .row.mt-2
+      == paginate @bulletins, remote: true
