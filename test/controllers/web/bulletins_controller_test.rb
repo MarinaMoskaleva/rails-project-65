@@ -53,17 +53,17 @@ class Web::BulletinsControllerTest < ActionDispatch::IntegrationTest
     assert_response :redirect
   end
 
-  # test 'should send to moderation bulletin' do
-  #   sign_in @bulletin.user
-  #   patch to_moderation_bulletin_path(@bulletin)
-  #   assert { @bulletin.reload.under_moderation? }
-  #   assert_redirected_to profile_path
-  # end
+  test 'should send to moderation bulletin' do
+    sign_in @bulletin.user
+    patch to_moderation_bulletin_path(@bulletin)
+    assert { @bulletin.reload.under_moderation? }
+    assert_redirected_to profile_path
+  end
 
-  # test 'should archive bulletin' do
-  #   sign_in @bulletin_to_update.user
-  #   patch archive_bulletin_url(@bulletin_to_update)
-  #   assert { @bulletin_to_update.reload.archived? }
-  #   assert_redirected_to profile_path
-  # end
+  test 'should archive bulletin' do
+    sign_in @bulletin_to_update.user
+    patch archive_bulletin_url(@bulletin_to_update)
+    assert { @bulletin_to_update.reload.archived? }
+    assert_redirected_to profile_path
+  end
 end
