@@ -6,7 +6,6 @@ AllCops:
   Exclude:
     - 'bin/**'
     - 'db/schema.rb'
-    - 'config/**/*'
     - 'db/migrate/**'
 
 Style/Documentation:
