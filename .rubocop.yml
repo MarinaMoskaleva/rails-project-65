@@ -9,6 +9,8 @@ AllCops:
     - 'bin/**'
     - 'db/schema.rb'
     - 'db/migrate/**'
+    - 'vendor/**/*'
+    - 'node_modules/**/*'
 
 Style/Documentation:
   Enabled: false
