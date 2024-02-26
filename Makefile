@@ -17,7 +17,7 @@ test:
 	bin/rails test
 
 lint:
-	bundle exec rubocop
+	bundle exec rubocop -c .rubocop.yml
 	bundle exec slim-lint app/views/
 
 lint-fix:
