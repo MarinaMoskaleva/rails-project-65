@@ -5,6 +5,6 @@ class Web::ProfileController < Web::ApplicationController
 
   def index
     @q = Bulletin.ransack(params[:q])
-    @bulletins = @q.result.includes(:user).where(user: current_user).page(params[:page])
+    @bulletins = @q.result.includes(:user).where(user: current_user).order(created_at: :desc).page(params[:page])
   end
 end

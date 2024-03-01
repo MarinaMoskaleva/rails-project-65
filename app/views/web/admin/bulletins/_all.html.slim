@@ -1,3 +1,5 @@
+.p-3.bg-light
+  = render 'web/shared/search_form', url: admin_bulletins_path
 table.table.table-borderless
   thead
     tr
@@ -21,4 +23,4 @@ table.table.table-borderless
         td
           = link_to t('show'), bulletin_path(bulletin), class: 'me-1'
           - if bulletin.may_archive?
-            = link_to t('archive'), archive_bulletin_path(bulletin), data: { turbo_method: :patch }, class: 'me-1'
+            = link_to t('archive'), archive_bulletin_path(bulletin), data: { turbo_confirm: t('are_you_sure_archive'), turbo_method: :patch }, class: 'me-1'

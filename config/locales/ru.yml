@@ -19,6 +19,7 @@ ru:
       bulletin_didnt_sent_to_archive: Не удалось отправить объявление в архив
       bulletin_wasnt_published: Не удалось опубликовать объявление
       bulletin_wasnt_rejected: Не удалось вернуть объявление
+      category_not_destroyed: Не удалось удалить категорию, так как она содержит объявления
 
 
   sign_in: Войти
@@ -32,6 +33,7 @@ ru:
   new_bulletin: Добавить объявление
   edit_bulletin: Редактировать объявление
   user_must_be_authorized: Пользователь должен быть авторизован
+  for_admins_only: Эта секция доступна только для администраторов
   bulletins: Объявления
   categories: Категории
   all_bulletins: Все объявления
@@ -60,6 +62,7 @@ ru:
     rejected: Возвращено
     archived: В архиве
   search_by_title: Искать по названию объявления
+  search_by_state: По состоянию
   choose_category: Выбрать категорию
   search_btn: Искать
   reset_btn: Сброс
@@ -67,4 +70,5 @@ ru:
     publish: Опубликовать
     reject: Вернуть
     archive: В архив
-  are_you_sure: Вы уверены?
+  are_you_sure_archive: Вы уверены, что хотите отправить объявление в архив?
+  are_you_sure_remove_category: Вы уверены, что хотите удалить категорию?

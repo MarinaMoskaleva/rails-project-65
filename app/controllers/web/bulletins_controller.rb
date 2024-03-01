@@ -6,11 +6,12 @@ class Web::BulletinsController < Web::ApplicationController
 
   def index
     @q = Bulletin.published.ransack(params[:q])
-    @bulletins = @q.result.includes(:user).page(params[:page])
+    @bulletins = @q.result.includes(:user).order(created_at: :desc).page(params[:page])
   end
 
   def show
     @bulletin = Bulletin.find_by(id: params[:id])
+    authorize @bulletin
   end
 
   def new
@@ -19,6 +20,7 @@ class Web::BulletinsController < Web::ApplicationController
 
   def edit
     @bulletin = set_bulletin
+    authorize @bulletin
   end
 
   def create

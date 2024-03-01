@@ -7,7 +7,7 @@
         hr
       = link_to t('add_bulletin_full'), new_bulletin_path
       .p-3.bg-light
-        = render 'web/shared/search_form'
+        == render 'web/shared/search_form', url: profile_path
       .row.mt-2
         table.table.table-borderless
           thead
@@ -35,6 +35,6 @@
                   - if bulletin.may_to_moderation?
                     = link_to t('on_moderation'), to_moderation_bulletin_path(bulletin), data: { turbo_method: :patch }, class: 'me-1'
                   - if bulletin.may_archive?
-                    = link_to t('to_archive'), archive_bulletin_path(bulletin), data: { turbo_method: :patch }, class: 'me-1 link-danger'
+                    = link_to t('to_archive'), archive_bulletin_path(bulletin), data: { turbo_confirm: t('are_you_sure_archive'), turbo_method: :patch }, class: 'me-1 link-danger'
       .row.mt-2
         == paginate @bulletins, remote: true

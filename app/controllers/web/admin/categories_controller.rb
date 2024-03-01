@@ -43,7 +43,12 @@ class Web::Admin::CategoriesController < Web::Admin::ApplicationController
     @category = Category.find_by(id: params[:id])
     return if @category.blank?
 
-    @category.destroy
+    if @category.bulletins.any?
+      flash[:error] = I18n.t('flash.error.category_not_destroyed')
+    else
+      @category.destroy
+    end
+
     redirect_to admin_categories_path
   end
 

@@ -4,7 +4,8 @@ class Web::Admin::BulletinsController < Web::Admin::ApplicationController
   before_action :set_bulletin, only: %i[publish archive reject]
 
   def index
-    @bulletins = Bulletin.includes(:user).page(params[:page])
+    @q = Bulletin.ransack(params[:q])
+    @bulletins = @q.result.order(created_at: :desc).page(params[:page])
   end
 
   def show
@@ -48,7 +49,7 @@ class Web::Admin::BulletinsController < Web::Admin::ApplicationController
   end
 
   def on_moderation
-    @bulletins = Bulletin.under_moderation.page(params[:page])
+    @bulletins = Bulletin.under_moderation.order(created_at: :desc).page(params[:page])
   end
 
   private

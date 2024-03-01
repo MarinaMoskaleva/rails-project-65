@@ -22,7 +22,7 @@ class BulletinPolicy < ApplicationPolicy
   end
 
   def edit?
-    update?
+    author?
   end
 
   def destroy?
