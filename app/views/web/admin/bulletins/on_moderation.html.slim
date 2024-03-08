@@ -24,7 +24,9 @@
               td
                 = link_to t('admin_action.publish'), publish_admin_bulletin_path(bulletin), data: { turbo_method: :patch }, class: 'me-1'
                 = link_to t('admin_action.reject'), reject_admin_bulletin_path(bulletin), data: { turbo_method: :patch }, class: 'me-1'
-                = link_to t('admin_action.archive'), archive_admin_bulletin_path(bulletin), data: { turbo_confirm: t('are_you_sure_archive'), turbo_method: :patch }, class: 'link-danger'
+                = link_to t('admin_action.archive'), archive_admin_bulletin_path(bulletin),
+                  data: { turbo_confirm: t('are_you_sure_archive'), turbo_method: :patch },
+                  class: 'link-danger'
 
     .row.mt-2
       == paginate @bulletins, remote: true
