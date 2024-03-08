@@ -5,22 +5,20 @@ require 'test_helper'
 class Web::Admin::BulletinsControllerTest < ActionDispatch::IntegrationTest
   def setup
     @user_admin = users(:admin)
+    sign_in @user_admin
   end
 
   test 'admin should get all bulletins' do
-    sign_in @user_admin
     get admin_bulletins_path
     assert_response :success
   end
 
   test 'admin should get bulletins on moderation' do
-    sign_in @user_admin
     get on_moderation_admin_bulletins_path
     assert_response :success
   end
 
   test 'should publish bulletin' do
-    sign_in @user_admin
     bulletin = bulletins(:under_moderation)
     patch publish_admin_bulletin_path(bulletin)
     assert { bulletin.reload.published? }
@@ -28,7 +26,6 @@ class Web::Admin::BulletinsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test 'should archive bulletin' do
-    sign_in @user_admin
     bulletin = bulletins(:published)
     patch archive_admin_bulletin_path(bulletin)
     assert { bulletin.reload.archived? }
@@ -36,7 +33,6 @@ class Web::Admin::BulletinsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test 'should reject bulletin' do
-    sign_in @user_admin
     bulletin = bulletins(:under_moderation)
     patch reject_admin_bulletin_path(bulletin)
     assert { bulletin.reload.rejected? }
