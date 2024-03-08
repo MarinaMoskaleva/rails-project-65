@@ -11,9 +11,10 @@ Rails.application.routes.draw do
     post '/auth/:provider', to: 'auth#request', as: :auth_request
     get '/auth/:provider/callback', to: 'auth#callback', as: :callback_auth
     delete '/auth/logout', to: 'auth#destroy'
-    get '/profile', to: 'profile#index'
+    
+    resource :profile, only: :show
 
-    resources :bulletins do
+    resources :bulletins, only: %i[index show new edit create update] do
       member do
         patch :to_moderation, :archive
       end
@@ -23,13 +24,13 @@ Rails.application.routes.draw do
 
     namespace :admin do
       root to: 'bulletins#on_moderation'
-      resources :bulletins, only: %i[index show] do
+      resources :bulletins, only: :index do
         get :on_moderation, on: :collection
         member do
           patch :publish, :archive, :reject
         end
       end
-      resources :categories
+      resources :categories, only: %i[index new edit create update destroy]
     end
   end
 end

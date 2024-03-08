@@ -23,8 +23,10 @@ class Web::AuthController < Web::ApplicationController
   private
 
   def find_or_create_user(auth_hash_params)
-    user = User.find_by(auth_hash_params)
-    user || User.create!(auth_hash_params)
+    user = User.find_by(email: auth_hash_params[:email])
+    user ||= User.create!(auth_hash_params)
+    user.update(name: auth_hash_params[:name]) if user.name != auth_hash_params[:name]
+    user
   end
 
   def make_user_admin(user)

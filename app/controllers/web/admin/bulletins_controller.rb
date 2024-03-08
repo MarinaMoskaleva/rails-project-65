@@ -8,10 +8,6 @@ class Web::Admin::BulletinsController < Web::Admin::ApplicationController
     @bulletins = @q.result.order(created_at: :desc).page(params[:page])
   end
 
-  def show
-    @bulletin = Bulletin.find_by(id: params[:id])
-  end
-
   def publish
     bulletin = set_bulletin
     authorize bulletin
