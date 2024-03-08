@@ -17,7 +17,7 @@ table.table.table-borderless
         td
           = link_to bulletin.title, bulletin_path(bulletin)
         td
-          = t("bulletin_states.#{bulletin.state}")
+          = bulletin.aasm.human_state
         td
           = time_ago_in_words(bulletin.created_at)
         td

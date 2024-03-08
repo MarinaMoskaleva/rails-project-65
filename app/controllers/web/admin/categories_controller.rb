@@ -31,7 +31,7 @@ class Web::Admin::CategoriesController < Web::Admin::ApplicationController
       redirect_to admin_categories_path
     else
       flash[:error] = I18n.t('flash.error.category_not_updated')
-      render :new, status: :unprocessable_entity
+      render :edit, status: :unprocessable_entity
     end
   end
 

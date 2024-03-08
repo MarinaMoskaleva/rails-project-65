@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
 class Web::Admin::BulletinsController < Web::Admin::ApplicationController
-  before_action :set_bulletin, only: %i[publish archive reject]
-
   def index
     @q = Bulletin.ransack(params[:q])
     @bulletins = @q.result.order(created_at: :desc).page(params[:page])
@@ -10,7 +8,6 @@ class Web::Admin::BulletinsController < Web::Admin::ApplicationController
 
   def publish
     bulletin = set_bulletin
-    authorize bulletin
     if bulletin.may_publish?
       bulletin.publish!
       flash[:notice] = I18n.t('flash.notice.bulletin_was_published')
@@ -22,7 +19,6 @@ class Web::Admin::BulletinsController < Web::Admin::ApplicationController
 
   def archive
     bulletin = set_bulletin
-    authorize bulletin
     if bulletin.may_archive?
       bulletin.archive!
       flash[:notice] = I18n.t('flash.notice.bulletin_sent_to_archive')
@@ -34,7 +30,6 @@ class Web::Admin::BulletinsController < Web::Admin::ApplicationController
 
   def reject
     bulletin = set_bulletin
-    authorize bulletin
     if bulletin.may_reject?
       bulletin.reject!
       flash[:notice] = I18n.t('flash.notice.bulletin_was_rejected')

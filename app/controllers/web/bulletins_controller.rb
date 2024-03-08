@@ -1,12 +1,11 @@
 # frozen_string_literal: true
 
 class Web::BulletinsController < Web::ApplicationController
-  before_action :check_if_user_authorized, except: %i[index show]
-  before_action :set_bulletin, only: %i[to_moderation archive edit update]
+  before_action :authenticate_user!, only: %i[new create to_moderation archive edit update]
 
   def index
     @q = Bulletin.published.ransack(params[:q])
-    @bulletins = @q.result.includes(:user).order(created_at: :desc).page(params[:page])
+    @bulletins = @q.result.order(created_at: :desc).page(params[:page])
   end
 
   def show
@@ -24,7 +23,7 @@ class Web::BulletinsController < Web::ApplicationController
   end
 
   def create
-    @bulletin = User.find_by(id: session[:user_id]).bulletins.build(bulletin_params)
+    @bulletin = current_user.bulletins.build(bulletin_params)
     if @bulletin.save
       flash[:notice] = I18n.t('flash.notice.bulletin_created')
       redirect_to root_path
@@ -36,6 +35,7 @@ class Web::BulletinsController < Web::ApplicationController
 
   def update
     @bulletin = set_bulletin
+    authorize @bulletin
     if @bulletin.update(bulletin_params)
       flash[:notice] = I18n.t('flash.notice.bulletin_updated')
       redirect_to root_path

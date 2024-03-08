@@ -25,6 +25,7 @@ ru:
   sign_in: Войти
   sign_out: Выйти
   title: Доска объявлений
+  already_signed_in: Вход уже выполнен
   main: Главная
   add_bulletin: Добавить
   add_bulletin_full: Добавить объявление
@@ -32,7 +33,7 @@ ru:
   success: Успешно
   new_bulletin: Добавить объявление
   edit_bulletin: Редактировать объявление
-  user_must_be_authorized: Пользователь должен быть авторизован
+  user_must_be_authenticated: Пользователь должен быть аутонтифицирован
   for_admins_only: Эта секция доступна только для администраторов
   bulletins: Объявления
   categories: Категории
