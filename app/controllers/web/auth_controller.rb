@@ -9,7 +9,8 @@ class Web::AuthController < Web::ApplicationController
       email: req_info[:email],
       name: req_info[:name]
     }
-    user = find_or_create_user(auth_hash_params)
+    user = User.find_or_initialize_by(email: auth_hash_params[:email])
+    user.update(name: auth_hash_params[:name])
     make_user_admin(user) # remove after check!
     sign_in user
     flash[:notice] = t('flash.notice.success')
@@ -22,13 +23,6 @@ class Web::AuthController < Web::ApplicationController
   end
 
   private
-
-  def find_or_create_user(auth_hash_params)
-    user = User.find_by(email: auth_hash_params[:email])
-    user ||= User.create!(auth_hash_params)
-    user.update(name: auth_hash_params[:name]) if user.name != auth_hash_params[:name]
-    user
-  end
 
   def make_user_admin(user)
     user.admin = true

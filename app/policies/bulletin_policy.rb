@@ -2,11 +2,11 @@
 
 class BulletinPolicy < ApplicationPolicy
   def show?
-    @record.published? || author? || admin?
+    @record.published? || author?
   end
 
   def update?
-    author? || admin?
+    author?
   end
 
   def edit?
@@ -18,8 +18,10 @@ class BulletinPolicy < ApplicationPolicy
   end
 
   def archive?
-    author? || admin?
+    author?
   end
+
+  private
 
   def author?
     @record.user == @user

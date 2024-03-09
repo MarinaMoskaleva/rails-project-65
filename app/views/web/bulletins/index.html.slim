@@ -6,7 +6,7 @@
           = t('bulletins').capitalize
         hr
       .p-3.bg-light
-        = render 'web/bulletins/search_form', url: root_path
+        = render 'web/bulletins/search_form', url: root_path, bulletin: @q
       .row.mt-2
         - @bulletins.each do |bulletin|
             .col-3.pt-2

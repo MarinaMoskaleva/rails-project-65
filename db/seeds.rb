@@ -15,8 +15,8 @@ ActiveRecord::Base.transaction do
 
   200.times do
     b = Bulletin.new(
-      title: Faker::Lorem.unique.sentence.slice(...50),
-      description: Faker::Lorem.unique.paragraph.slice(...1000),
+      title: Faker::Lorem.unique.sentence.truncate(50),
+      description: Faker::Lorem.unique.paragraph.truncate(100),
       user: users.sample,
       category: categories.sample,
       state: states.sample

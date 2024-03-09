@@ -25,21 +25,17 @@ class Web::BulletinsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test 'should create' do
-    bulletin_attr = {
-      title: Faker::Lorem.unique.sentence.slice(...50),
-      description: Faker::Lorem.unique.paragraph.slice(...1000),
+    bulletin_attrs = {
+      title: Faker::Lorem.unique.sentence.truncate(50),
+      description: Faker::Lorem.unique.paragraph.truncate(1000),
       user_id: @bulletin.user_id,
       category_id: @bulletin.category_id,
       image: fixture_file_upload('bulletin_0.jpg', 'image/jpeg')
     }
-    post bulletins_url, params: { bulletin: bulletin_attr }
-    last_created_bulletin = Bulletin.last
+    post bulletins_url, params: { bulletin: bulletin_attrs }
+    created = Bulletin.find_by(bulletin_attrs.except(:image))
+    assert_not_nil created.image
     assert_redirected_to root_path
-    assert_equal bulletin_attr[:title], last_created_bulletin.title
-    assert_equal bulletin_attr[:description], last_created_bulletin.description
-    assert_equal bulletin_attr[:user_id], last_created_bulletin.user_id
-    assert_equal bulletin_attr[:category_id], last_created_bulletin.category_id
-    assert_not_nil last_created_bulletin.image
   end
 
   test 'should edit' do
@@ -48,19 +44,19 @@ class Web::BulletinsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test 'should update' do
-    bulletin_attr_to_update = {
-      title: Faker::Lorem.unique.sentence.slice(...50),
-      description: Faker::Lorem.unique.paragraph.slice(...1000),
+    bulletin_attrs_to_update = {
+      title: Faker::Lorem.unique.sentence.truncate(50),
+      description: Faker::Lorem.unique.paragraph.truncate(1000),
       user_id: @bulletin_to_update.user_id,
       category_id: @bulletin_to_update.category_id,
       image: fixture_file_upload('bulletin_1.jpg', 'image/jpeg')
     }
-    patch bulletin_url(@bulletin_to_update), params: { bulletin: bulletin_attr_to_update }
+    patch bulletin_url(@bulletin_to_update), params: { bulletin: bulletin_attrs_to_update }
     assert_redirected_to root_path
 
     @bulletin_to_update.reload
-    assert_equal bulletin_attr_to_update[:title], @bulletin_to_update.title
-    assert_equal bulletin_attr_to_update[:description], @bulletin_to_update.description
+    assert_equal bulletin_attrs_to_update[:title], @bulletin_to_update.title
+    assert_equal bulletin_attrs_to_update[:description], @bulletin_to_update.description
   end
 
   test 'should send to moderation bulletin' do
