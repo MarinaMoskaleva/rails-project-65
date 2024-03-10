@@ -4,9 +4,9 @@
       = f.search_field :title_cont, class: 'form-control'
       small.form-text.text-muted
         = t('search_by_title')
-    .col-4
+    .col-3
       = f.input :state_eq, collection: Bulletin.aasm.states, value_method: :name, label: false,
         label_method: :human_name, hint: t('search_by_state'), hint_html: { class: 'text-muted' }
-    .col-2
+    .col-3
       = f.submit t('search_btn'), class: 'btn btn-primary me-2'
       = link_to t('reset_btn'), url, class: 'btn btn-outline-primary'

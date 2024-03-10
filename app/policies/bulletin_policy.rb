@@ -2,7 +2,7 @@
 
 class BulletinPolicy < ApplicationPolicy
   def show?
-    @record.published? || author?
+    @record.published? || author? || admin?
   end
 
   def update?
@@ -25,5 +25,9 @@ class BulletinPolicy < ApplicationPolicy
 
   def author?
     @record.user == @user
+  end
+
+  def admin?
+    @user.admin?
   end
 end

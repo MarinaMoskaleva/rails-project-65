@@ -11,7 +11,6 @@ class Web::AuthController < Web::ApplicationController
     }
     user = User.find_or_initialize_by(email: auth_hash_params[:email])
     user.update(name: auth_hash_params[:name])
-    make_user_admin(user) # remove after check!
     sign_in user
     flash[:notice] = t('flash.notice.success')
     redirect_to root_path
@@ -20,12 +19,5 @@ class Web::AuthController < Web::ApplicationController
   def destroy
     sign_out
     redirect_to root_path
-  end
-
-  private
-
-  def make_user_admin(user)
-    user.admin = true
-    user.save!
   end
 end
